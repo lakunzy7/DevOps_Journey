@@ -1,0 +1,203 @@
+# DevOps Journey Documentation
+
+Welcome to the documentation of my DevOps learning journey! This repository serves as a record of the concepts, tools, and projects I've worked on so far.
+
+---
+
+## **Introduction**
+
+This journey covers a wide range of DevOps topics, from foundational principles to hands-on projects involving virtualization, Linux server management, and automation. This repository is intended to:
+
+- Track my learning progress.
+- Showcase the tools and technologies I have worked with.
+- Serve as a reference for others on a similar path.
+
+---
+
+## **Table of Contents**
+
+1. [DevOps Fundamentals](#devops-fundamentals)
+2. [Virtualization and Vagrant](#virtualization-and-vagrant)
+3. [Linux Essentials](#linux-essentials)
+4. [Projects](#projects)
+5. [Tools Used](#tools-used)
+6. [Challenges Faced and Solutions](#challenges-faced-and-solutions)
+7. [Next Steps](#next-steps)
+8. [Timeline & Priority](#timeline--priority)
+
+---
+
+## **1. DevOps Fundamentals**
+
+### **What is DevOps?**
+- DevOps integrates development and operations teams to improve collaboration and productivity. By bridging the gap between development and IT operations, it fosters a culture of shared responsibility and continuous improvement. DevOps aims to automate and optimize the software development lifecycle (SDLC), reducing deployment times, minimizing errors, and delivering value to end-users more efficiently.
+- Key principles:
+  - Continuous Integration (CI): Regularly merging code changes to a shared repository and running automated builds and tests to detect issues early.
+  - Continuous Delivery (CD): Automating the deployment process to ensure that software can be reliably released to production at any time.
+
+#### **Key Commands/Examples**
+```bash
+# Checking the status of a Jenkins pipeline
+curl -X GET http://localhost:8080/job/MyPipeline/api/json
+```
+
+### **Quizzes and Learnings**
+- Completed quizzes on DevOps principles, CI/CD, and best practices. These quizzes helped solidify foundational knowledge and provided insight into real-world applications of DevOps practices.
+
+---
+
+## **2. Virtualization and Vagrant**
+
+### **What is Virtualization?**
+- Virtualization enables running multiple virtual machines (VMs) on a single physical system by abstracting hardware resources. This technology allows for better utilization of resources, flexibility in testing environments, and cost savings. For instance, a developer can run different operating systems on the same machine to test software compatibility or create isolated environments to prevent conflicts.
+
+### **Vagrant Setup**
+- Steps to set up a Vagrant virtual machine:
+
+#### **Code Snippet**
+```bash
+# Initialize a Vagrantfile
+vagrant init
+
+# Start the VM
+vagrant up
+
+# SSH into the VM
+vagrant ssh
+```
+
+### **Syncing Directories**
+```bash
+# Example: Syncing a local folder with the VM
+config.vm.synced_folder "./local_folder", "/home/vagrant/shared_folder"
+```
+- When syncing directories, ensure the shared folder has appropriate permissions. If permissions issues occur, consider adding the `owner` and `group` parameters to the configuration:
+
+```bash
+config.vm.synced_folder "./local_folder", "/home/vagrant/shared_folder", owner: "vagrant", group: "vagrant"
+```
+
+---
+
+## **3. Linux Essentials**
+
+### **Basic Commands**
+- Navigating the file system:
+
+#### **Code Snippet**
+```bash
+# List files
+ls -l
+
+# Change directory
+cd /path/to/directory
+
+# Create a directory
+mkdir new_folder
+```
+- Linux commands are fundamental for managing servers and automating tasks. For example, `ls` is used to list directory contents, while `mkdir` creates new directories. Understanding these basics is crucial for working with Linux-based systems.
+
+### **File Permissions**
+```bash
+# Change file permissions
+chmod 755 file_name
+
+# View file permissions
+ls -l
+```
+- File permissions are represented by a three-part structure (e.g., `rwxr-xr-x`):
+  - `r` (read), `w` (write), and `x` (execute) specify access rights for the owner, group, and others.
+  - The numeric representation (e.g., `755`) simplifies permission settings: 7 = read/write/execute, 5 = read/execute.
+
+### **User Management**
+```bash
+# Add a new user
+sudo adduser new_user
+
+# Add a user to a group
+sudo usermod -aG group_name user_name
+```
+- User and group management ensures proper access control in multi-user environments. Adding a user to a specific group allows for granular permission settings, enhancing security.
+
+---
+
+## **4. Projects**
+
+### **1. Automating Website Setup**
+- Used Vagrant and Linux to automate the setup of an Apache web server. Automation simplifies repetitive tasks, ensuring consistency and reducing the risk of manual errors.
+
+#### **Code Snippet**
+```bash
+# Install Apache on Ubuntu
+sudo apt update
+sudo apt install apache2 -y
+
+# Start the Apache service
+sudo systemctl start apache2
+```
+- Automating tasks like Apache installation allows for rapid deployment of web servers, particularly in scalable environments.
+
+### **2. WordPress Setup**
+- Automated the setup of WordPress using a LAMP stack (Linux, Apache, MySQL, PHP). This project demonstrated the importance of scripting for consistent and efficient server provisioning.
+
+#### **Code Snippet**
+```bash
+# Install MySQL
+sudo apt install mysql-server -y
+
+# Secure MySQL installation
+sudo mysql_secure_installation
+
+# Install PHP and required extensions
+sudo apt install php libapache2-mod-php php-mysql -y
+```
+- Scripting the LAMP stack installation ensures the environment is configured correctly every time, reducing setup errors.
+
+---
+
+## **5. Tools Used**
+- **Vagrant**: Virtual machine provisioning.
+- **VirtualBox**: VM hosting.
+- **Linux**: Server management and scripting.
+- **AWS**: Cloud platform setup.
+
+---
+
+## **6. Challenges Faced and Solutions**
+
+### **Example 1: Vagrant Network Configuration**
+- **Problem**: VM could not connect to the internet.
+- **Solution**: Updated the Vagrantfile with the following:
+
+#### **Code Snippet**
+```bash
+config.vm.network "public_network"
+```
+- Networking issues are common when setting up VMs. Configuring the `public_network` ensures the VM uses the host's network adapter, providing internet access.
+
+---
+
+## **7. Next Steps**
+
+- Learn about Docker and containerization. Containers allow for lightweight, consistent, and portable application deployments, making them a vital part of modern DevOps practices.
+- Dive into Kubernetes for container orchestration. Kubernetes manages containerized applications at scale, automating deployment, scaling, and operations.
+- Explore advanced CI/CD pipelines with Jenkins and GitHub Actions to enhance automation and streamline the SDLC.
+- Expand my understanding of Infrastructure as Code (IAC) with tools like Terraform and Ansible, enabling automated and reproducible infrastructure deployments.
+
+---
+
+## **8. Timeline & Priority**
+
+### **Learning Timeline**
+1. **Week 1-2**: Master Docker fundamentals, including building and managing containers.
+2. **Week 3-4**: Learn Kubernetes basics, focusing on deployment and scaling.
+3. **Week 5**: Study advanced CI/CD pipelines and automation tools.
+4. **Week 6**: Dive into Infrastructure as Code (IAC) with Terraform and Ansible.
+
+### **Priority Order**
+1. **Containerization**: Docker basics and best practices.
+2. **Orchestration**: Kubernetes deployment and scaling.
+3. **CI/CD**: Jenkins and GitHub Actions for automated pipelines.
+4. **IAC**: Infrastructure automation with Terraform and Ansible.
+
+Feel free to fork this repository and adapt it for your own learning journey!
